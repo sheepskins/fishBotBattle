@@ -20,12 +20,9 @@ def chessCallback(req):
     
     prev_move = chess.Move.from_uci(req.prev_move)
     board.push(prev_move)
-    rospy.loginfo(board)
     if not board.is_game_over():
         action = fish.play(board,time_limit)
-        rospy.loginfo("Foo")
         chess_move = str(action.move)
-        rospy.loginfo(chess_move)
         if board.is_capture(action.move): 
             result = chess_move +',yes'+',no'
         elif board.is_castling(action.move): 
